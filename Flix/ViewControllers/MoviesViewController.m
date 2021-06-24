@@ -31,28 +31,14 @@
     
     // Start the activity indicator
     [self.activityIndicator startAnimating];
-    self.tableView.alpha = 0;
+    [self.view bringSubviewToFront:self.activityIndicator];
     
-    [UIView animateWithDuration:1 animations:^{
-
-        [self.view bringSubviewToFront:self.activityIndicator];
-        self.tableView.alpha = 1;
-        [self fetchMovies];
-        
-    }];
-    [self.activityIndicator stopAnimating];
-    
-    
-    
-    // Stop the activity indicator
-    // Hides automatically if "Hides When Stopped" is enabled
-//
+    [self fetchMovies];
     
     
     self.refreshControl = [[UIRefreshControl alloc] init];
     [self.refreshControl addTarget:self action:@selector(fetchMovies) forControlEvents:UIControlEventValueChanged];
     [self.tableView insertSubview:self.refreshControl atIndex:0];
-//    [self.tableView addSubview:self.refreshControl];
 }
 
 - (void) fetchMovies {
@@ -63,21 +49,43 @@
     NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
            if (error != nil) {
                NSLog(@"%@", [error localizedDescription]);
+               //Creating the Alert
+               UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Cannot Get Movies"
+                                                                                          message:@"The internet connection appears to be offline"
+                                                                                   preferredStyle:(UIAlertControllerStyleAlert)];
+               
+               // create an try again action
+               UIAlertAction *tryAgainAction = [UIAlertAction actionWithTitle:@"Try Again"
+                                                                  style:UIAlertActionStyleDefault
+                                                                handler:^(UIAlertAction * _Nonnull action) {
+                                                                        // handle response here.
+                                                                        // Start the activity indicator
+                                                                        [self.activityIndicator startAnimating];
+                                                                        [self.view bringSubviewToFront:self.activityIndicator];
+                   
+                                                                        [self fetchMovies];
+                                                                }];
+               // add the try again action to the alert controller
+               [alert addAction:tryAgainAction];
+               
+               [self presentViewController:alert animated:YES completion:^{
+                   // optional code for what happens after the alert controller has finished presenting
+               }];
            }
            else {
-               NSDictionary *dataDictionary = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+                   NSDictionary *dataDictionary = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
 
-               // TODO: Get the array of movies
-               self.movies = dataDictionary[@"results"];
-               for (NSDictionary *movie in self.movies){
-                   NSLog(@"%@", movie[@"title"]);
-               }
-               // TODO: Store the movies in a property to use elsewhere
-               // TODO: Reload your table view data
-               [self.tableView reloadData];
+                   // TODO: Get the array of movies
+                   self.movies = dataDictionary[@"results"];
+                   // TODO: Store the movies in a property to use elsewhere
+                   // TODO: Reload your table view data
+                   [self.tableView reloadData];
+               
            }
+        [self.activityIndicator stopAnimating];
         [self.refreshControl endRefreshing];
        }];
+    
     [task resume];
 }
 
@@ -89,8 +97,6 @@
     
     MovieCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MovieCell"];
     NSDictionary *movie = self.movies[indexPath.row];
-    cell.titleLabel.text = movie[@"title"];
-    cell.synopsisLabel.text = movie[@"overview"];
     
     NSString *baseURLString = @"https://image.tmdb.org/t/p/w500";
     NSString *posterURL = movie[@"poster_path"];
@@ -98,6 +104,9 @@
     
     NSURL *fullPosterURL = [NSURL URLWithString:fullPosterURLString];
     cell.posterImage.image = nil;
+    
+    cell.titleLabel.text = movie[@"title"];
+    cell.synopsisLabel.text = movie[@"overview"];
     [cell.posterImage setImageWithURL:fullPosterURL];
     return cell;
 }
