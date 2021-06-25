@@ -58,7 +58,7 @@
                                             <outlet property="posterImage" destination="5DF-ia-Obk" id="4PN-lo-B9S"/>
                                             <outlet property="synopsisLabel" destination="Dma-aZ-wuy" id="x8d-0g-bZV"/>
                                             <outlet property="titleLabel" destination="32a-N9-MVp" id="Hup-K1-Pe8"/>
-                                            <segue destination="bhH-0c-PiM" kind="show" id="6LO-Y3-z0Z"/>
+                                            <segue destination="bhH-0c-PiM" kind="show" identifier="MovieCollectionCell" id="6LO-Y3-z0Z"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -92,6 +92,7 @@
                     <connections>
                         <segue destination="2wG-jN-hKS" kind="relationship" relationship="viewControllers" id="s56-bR-Nyf"/>
                         <segue destination="kbt-X7-0Y8" kind="relationship" relationship="viewControllers" id="9Q9-gw-Qcm"/>
+                        <segue destination="tay-wp-EHa" kind="relationship" relationship="viewControllers" id="WLK-9H-hcF"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KVe-Iq-mCO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -103,11 +104,11 @@
             <objects>
                 <viewController id="bhH-0c-PiM" customClass="DetailsViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="FyI-lt-5D5">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="725"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pGy-HV-43Z">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <rect key="frame" x="0.0" y="0.0" width="426" height="896"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aCC-uH-wXg">
@@ -132,6 +133,27 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mdv-FK-bOt">
+                                        <rect key="frame" x="209" y="688" width="165" height="36"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="0.58039215686274503" green="0.066666666666666666" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="20"/>
+                                        <state key="normal" title="Find Similar Movies">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <segue destination="qEC-tN-g7y" kind="show" id="B4K-5E-dcV"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5bZ-wK-1Cw">
+                                        <rect key="frame" x="49" y="688" width="141" height="36"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="0.58072251080000004" green="0.066734083" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="20"/>
+                                        <state key="normal" title="Add to Watchlist">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <viewLayoutGuide key="contentLayoutGuide" id="Cm9-ik-RKV"/>
@@ -145,13 +167,84 @@
                     <connections>
                         <outlet property="backdropView" destination="aCC-uH-wXg" id="Q5h-MX-oky"/>
                         <outlet property="posterView" destination="oiH-xp-dfb" id="qU1-WQ-aoJ"/>
+                        <outlet property="similarMovieButton" destination="Mdv-FK-bOt" id="1Uh-jb-0Y7"/>
                         <outlet property="synopsisLabel" destination="eXF-OX-nz2" id="OBU-SE-VXj"/>
                         <outlet property="titleLabel" destination="xc4-sR-Ta3" id="QK1-PB-qdC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hwd-ZV-Ca4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3460.8695652173915" y="1806.6964285714284"/>
+            <point key="canvasLocation" x="1047.8260869565217" y="1830.8035714285713"/>
+        </scene>
+        <!--Similar Movies-->
+        <scene sceneID="cWi-Gj-5ej">
+            <objects>
+                <viewController id="qEC-tN-g7y" customClass="SimilarMoviesViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="UiX-kA-qvl">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="uEQ-ii-VS7">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="725"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="5" id="TQV-7f-dfZ">
+                                    <size key="itemSize" width="179" height="226"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="5" minY="5" maxX="5" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MovieCollectionCell" id="COn-1h-GKr" customClass="MovieCollectionCell">
+                                        <rect key="frame" x="106" y="5" width="202" height="265"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="j8y-05-wdT">
+                                            <rect key="frame" x="0.0" y="0.0" width="202" height="265"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EyW-Za-K5h">
+                                                    <rect key="frame" x="0.0" y="0.0" width="202" height="265"/>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                    <accessibility key="accessibilityConfiguration" identifier="Poster Image"/>
+                                                </imageView>
+                                            </subviews>
+                                        </collectionViewCellContentView>
+                                        <size key="customSize" width="202" height="265"/>
+                                        <connections>
+                                            <outlet property="similarPosterImage" destination="EyW-Za-K5h" id="3ax-hf-3JF"/>
+                                            <segue destination="bhH-0c-PiM" kind="show" id="6zt-aW-74O"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="KfW-xD-dT3"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Similar Movies" id="T4Y-U8-Mjz"/>
+                    <connections>
+                        <outlet property="collectionView" destination="uEQ-ii-VS7" id="gOt-UD-m3u"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wnw-oK-Qsm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2147.826086956522" y="1847.5446428571427"/>
+        </scene>
+        <!--Watch List-->
+        <scene sceneID="iwf-d8-fLX">
+            <objects>
+                <navigationController id="tay-wp-EHa" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Watch List" image="ticket_tabbar_icon" id="WZo-bf-Yeg">
+                        <color key="badgeColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBarItem>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="OGb-5h-CGJ">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="e9C-mU-2Bh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2254" y="127"/>
         </scene>
         <!--Now Playing-->
         <scene sceneID="gd8-Ug-sVs">
@@ -194,7 +287,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kzr-iu-HUe" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1978" y="131"/>
+            <point key="canvasLocation" x="-88" y="117"/>
         </scene>
         <!--Search-->
         <scene sceneID="6nU-FB-Jrh">
@@ -219,7 +312,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Efo-40-paf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3461" y="141"/>
+            <point key="canvasLocation" x="1048" y="117"/>
         </scene>
         <!--Search-->
         <scene sceneID="mjf-M3-pth">
@@ -235,7 +328,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="barTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="search" enablesReturnKeyAutomatically="YES"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="searchField.textColor">
                                         <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -289,7 +382,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zao-IQ-0hi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3431.884057971015" y="949.55357142857133"/>
+            <point key="canvasLocation" x="1048" y="950"/>
         </scene>
         <!--Movies-->
         <scene sceneID="lhA-NS-r8N">
@@ -348,15 +441,16 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6o3-Oq-dE7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1976.8115942028987" y="949.55357142857133"/>
+            <point key="canvasLocation" x="-88" y="950"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="hJb-3i-hVf"/>
+        <segue reference="6zt-aW-74O"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>
         <image name="now_playing_tabbar_item" width="21" height="21"/>
+        <image name="ticket_tabbar_icon" width="25" height="25"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

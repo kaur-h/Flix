@@ -7,6 +7,7 @@
 
 #import "DetailsViewController.h"
 #import "UIImageView+AFNetworking.h"
+#import "SimilarMoviesViewController.h"
 
 @interface DetailsViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *backdropView;
@@ -17,6 +18,7 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *synopsisLabel;
 
+@property (weak, nonatomic) IBOutlet UIButton *similarMovieButton;
 @end
 
 @implementation DetailsViewController
@@ -43,14 +45,16 @@
     [self.synopsisLabel sizeToFit];
 }
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+ SimilarMoviesViewController *detailController = [segue destinationViewController];
+ detailController.movie = self.movie;
 }
-*/
+
 
 @end

@@ -91,6 +91,10 @@
                    // TODO: Store the movies in a property to use elsewhere
                    // TODO: Reload your table view data
                    [self.collectionView reloadData];
+//               for (NSDictionary *movie in self.movies){
+//                   NSLog(@"%@", movie[@"vote_average"]);
+//                   NSLog(@"%@", movie[@"id"]);
+//               }
                
            }
         [self.activityIndicator stopAnimating];

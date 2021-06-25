@@ -115,6 +115,23 @@
  
 }
 
+- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
+    self.searchBar.showsCancelButton = YES;
+}
+
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
+    self.searchBar.showsCancelButton = NO;
+    self.searchBar.text = @"";
+    [self fetchMovies];
+    [self.searchBar resignFirstResponder];
+    
+}
+
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
+{
+    [self.tableView reloadData];
+    [self.searchBar resignFirstResponder];
+}
 
 #pragma mark - Navigation
 
