@@ -19,6 +19,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *synopsisLabel;
 
 @property (weak, nonatomic) IBOutlet UIButton *similarMovieButton;
+
+@property (weak, nonatomic) IBOutlet UILabel *releaseDateButton;
+
 @end
 
 @implementation DetailsViewController
@@ -40,9 +43,13 @@
     [self.backdropView setImageWithURL:backdropPosterURL];
     self.titleLabel.text = self.movie[@"title"];
     self.synopsisLabel.text = self.movie[@"overview"];
+    self.releaseDateButton.text = self.movie[@"release_date"];
+    
+    self.similarMovieButton.layer.cornerRadius = 4;
     
     [self.titleLabel sizeToFit];
     [self.synopsisLabel sizeToFit];
+    [self.releaseDateButton sizeToFit];
 }
 
 
